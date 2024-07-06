@@ -15,6 +15,23 @@ app.get('/roll/:number', (req, res) => {
     }
 });
 
+const collectibles = [
+    { name: 'shiny ball', price: 5.95 },
+    { name: 'autographed picture of a dog', price: 10 },
+    { name: 'vintage 1970s yogurt SOLD AS-IS', price: 0.99 }
+  ];
+
+
+app.get('/collectibles/:index', (req, res) => {
+    const index = parseInt(req.params.index);
+    if(isNaN(index) || index < 0 || index>= collectibles.length) {
+        res.send(`<h1>This item is not in stock. Please check back soon!</h1>`);
+    }
+    res.send(`<h1>So, you want the ${collectibles[index].name}? 
+        For $${collectibles[index].price}, it can be yours!</h1>`);
+
+})
+
 app.listen(3000, () => {
     console.log('Listening on port 3000');
 });
